@@ -10,13 +10,14 @@ public class Selection : MonoBehaviour
     public RaycastHit hit;
     public Vector3 selectionPosition;
     public Vector3 sphereMove;
-
+    Sphere sphere;
     Ray ray;
 
     Vector3 cameraPosition;
     Vector3 cameraPositionRay;
     GameObject movePlacePoint;
     GameObject selectedSphere;
+
     //Camera camera;
 
 
@@ -24,6 +25,7 @@ public class Selection : MonoBehaviour
     {
         
     }
+
 
     // Update is called once per frame
     void Update()
@@ -36,6 +38,8 @@ public class Selection : MonoBehaviour
             selectedSphere = GameObject.Find(hit.transform.name);
 
             selectionPosition = selectedSphere.transform.position;
+            sphere = selectedSphere.GetComponent<Sphere>();
+            
             Debug.Log(hit.transform.name);
 
         }
@@ -46,6 +50,7 @@ public class Selection : MonoBehaviour
             movePlacePoint = GameObject.Find(hit.transform.name);
             sphereMove = selectedSphere.transform.position;
             selectedSphere.transform.position = Vector3.MoveTowards(sphereMove, movePlacePoint.transform.position, 2 * Time.deltaTime);
+            Debug.Log("tak");
         }
     }
 }
