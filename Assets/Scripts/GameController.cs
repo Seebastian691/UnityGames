@@ -1,19 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class GameController : MonoBehaviour
 {
+    [SerializeField] GameStartPosition startPosition;
+    public string[] whiteSpherePosition;
+    public string[] blackSpherePosition;
     
-    // Start is called before the first frame update
+
+
+
     void Start()
     {
-        
+        SetStartingPosition();
     }
 
-    // Update is called once per frame
-    void Update()
+    
+    void SetStartingPosition()
     {
-        
+        for (int i = 0; i <= 8; i++)
+        {
+            whiteSpherePosition[i] = startPosition.WhiteStartPosition[i];
+        }
+
+        for (int i = 0; i <= 8; i++)
+        {
+            blackSpherePosition[i] = startPosition.BlackStartPosition[i];
+        }
     }
 }

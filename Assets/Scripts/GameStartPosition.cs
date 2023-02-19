@@ -2,11 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameStartPosition : MonoBehaviour
+[CreateAssetMenu(fileName = "NewStartPosition", menuName = "StartPosition")]
+public class GameStartPosition : ScriptableObject
 {
-
-    void Update()
-    {
-        
-    }
+    public string[] WhiteStartPosition;
+    public string[] BlackStartPosition;
 }

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WhiteSphere : MonoBehaviour
+public class WhiteSphereScript : MonoBehaviour
 {
     [SerializeField]GameController gameController;
     private string startingPlace;
