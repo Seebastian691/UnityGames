@@ -817,6 +817,7 @@ MonoBehaviour:
   selectionPosition: {x: 0, y: 0, z: 0}
   selectedPlace: 
   sphereMove: {x: 0, y: 0, z: 0}
+  adjacentPlaces: []
 --- !u!1001 &1079497040
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1217,6 +1218,7 @@ MonoBehaviour:
   - 
   - 
   - 
+  cameraMain: {fileID: 963194225}
 --- !u!1 &1523495069 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5999052024667430429, guid: 444ecdfe1a24a20458bca2fe94a3b8ac, type: 3}

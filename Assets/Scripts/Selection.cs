@@ -11,7 +11,7 @@ public class Selection : MonoBehaviour
     [SerializeField]GameController gameController;
     public RaycastHit hit;
     public Vector3 selectionPosition;
-    public string selectedPlace;
+    public string[] selectedPlace;
     public Vector3 sphereMove;
     WhiteSphereScript whiteSphereScript;
     Ray ray;
@@ -20,6 +20,8 @@ public class Selection : MonoBehaviour
     Vector3 cameraPositionRay;
     GameObject movePlacePoint;
     GameObject selectedSphere;
+
+    public string[] adjacentPlaces;
 
     //Camera camera;
 
@@ -42,6 +44,23 @@ public class Selection : MonoBehaviour
 
             selectionPosition = selectedSphere.transform.position;
             whiteSphereScript = selectedSphere.GetComponent<WhiteSphereScript>();
+            selectedPlace = new string[3];
+            selectedPlace = hit.transform.name;
+            CheckPlace();
+            
+            //Debug.Log(hit.transform.name);
+
+        }
+        if(Input.GetMouseButtonDown(0) && Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            // RaycastHit hit;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Physics.Raycast(ray, out hit, 100f);
+            selectedSphere = GameObject.Find(hit.transform.name);
+
+            selectionPosition = selectedSphere.transform.position;
+            whiteSphereScript = selectedSphere.GetComponent<WhiteSphereScript>();
+            selectedPlace = new string[3];
             selectedPlace = hit.transform.name;
             CheckPlace();
             
@@ -69,7 +88,8 @@ public class Selection : MonoBehaviour
             }
 
         }
-    void CalculateSelection(){
+    }
+    public void CalculateSelection(){
         string xString = selectedPlace.Substring(0, 1);
         string yString = selectedPlace.Substring(2, 1);
         string zString = selectedPlace.Substring(4, 1);
@@ -77,7 +97,8 @@ public class Selection : MonoBehaviour
         int y = Int32.Parse(yString);
         int z = Int32.Parse(zString);
         Debug.Log(x);
-    }
+
+        adjacentPlaces = new string[10];
     }
 
 }
