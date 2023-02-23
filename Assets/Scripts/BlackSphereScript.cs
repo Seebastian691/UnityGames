@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BlackSphereScript : MonoBehaviour
 {
-    [SerializeField]GameController gameController;
+    [SerializeField] BoardController boardController;
     private string startingPlace;
     [SerializeField] int blackSphereIndex;
     string currentPlace;
@@ -24,7 +24,7 @@ public class BlackSphereScript : MonoBehaviour
         // int y = Int32.Parse(yString);
         // int z = Int32.Parse(zString);
         //Debug.Log(x);
-        startingPlace = gameController.blackSpherePosition[blackSphereIndex];
+        // startingPlace = gameController.blackSpherePosition[blackSphereIndex];
 
     }
     
@@ -32,10 +32,9 @@ public class BlackSphereScript : MonoBehaviour
 
     void Update()
     {
-        currentPlace = startingPlace;
-        boardPlace = GameObject.Find(startingPlace);
+        currentPlace = boardController.blackSpherePosition[blackSphereIndex];
+        boardPlace = GameObject.Find(currentPlace);
         move = boardPlace.transform.position;
-        //Debug.Log(boardPlace.transform);
         transform.position = Vector3.MoveTowards(transform.position, move, moveSpeed * Time.deltaTime);
 
     }

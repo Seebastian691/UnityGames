@@ -1,13 +1,12 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class WhiteSphereScript : MonoBehaviour
 {
-    [SerializeField]GameController gameController;
+[SerializeField] BoardController boardController;
     private string startingPlace;
-    [SerializeField] int whiteSphereIndex;
+    [SerializeField] int whitephereIndex;
     string currentPlace;
     GameObject boardPlace;
     Vector3 move;
@@ -25,7 +24,7 @@ public class WhiteSphereScript : MonoBehaviour
         // int y = Int32.Parse(yString);
         // int z = Int32.Parse(zString);
         //Debug.Log(x);
-        startingPlace = gameController.whiteSpherePosition[whiteSphereIndex];
+        // startingPlace = gameController.blackSpherePosition[blackSphereIndex];
 
     }
     
@@ -33,11 +32,9 @@ public class WhiteSphereScript : MonoBehaviour
 
     void Update()
     {
-        currentPlace = startingPlace;
-        boardPlace = GameObject.Find(startingPlace);
+        currentPlace = boardController.whiteSpherePosition[whitephereIndex];
+        boardPlace = GameObject.Find(currentPlace);
         move = boardPlace.transform.position;
-        //Debug.Log(boardPlace.transform);
         transform.position = Vector3.MoveTowards(transform.position, move, moveSpeed * Time.deltaTime);
-
     }
 }

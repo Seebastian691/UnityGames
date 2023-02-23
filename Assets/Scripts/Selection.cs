@@ -8,17 +8,18 @@ public class Selection : MonoBehaviour
     [SerializeField] Camera cameraMain;
     [SerializeField] GameObject whiteSphere;
     [SerializeField] LayerMask whiteSphereLayer;
-    [SerializeField]GameController gameController;
+    [SerializeField] BoardController boardController;
     public RaycastHit hit;
     public Vector3 selectionPosition;
-    public string[] selectedPlace;
+    public string selectedPlace;
     public Vector3 sphereMove;
     WhiteSphereScript whiteSphereScript;
     Ray ray;
+    public string[] possibleMoves;
 
     Vector3 cameraPosition;
     Vector3 cameraPositionRay;
-    GameObject movePlacePoint;
+    public string movePlace;
     GameObject selectedSphere;
 
     public string[] adjacentPlaces;
@@ -37,56 +38,32 @@ public class Selection : MonoBehaviour
     {
         if(Input.GetMouseButtonDown(0))
         {
-            // RaycastHit hit;
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            Physics.Raycast(ray, out hit, 100f);
-            selectedSphere = GameObject.Find(hit.transform.name);
-
-            selectionPosition = selectedSphere.transform.position;
-            whiteSphereScript = selectedSphere.GetComponent<WhiteSphereScript>();
-            selectedPlace = new string[3];
-            selectedPlace = hit.transform.name;
+            CheckSelection();
             CheckPlace();
-            
+            // selectedPlace = new string[1];
             //Debug.Log(hit.transform.name);
 
         }
-        if(Input.GetMouseButtonDown(0) && Input.GetKeyDown(KeyCode.LeftShift))
+        if(Input.GetMouseButtonDown(0))
         {
-            // RaycastHit hit;
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            Physics.Raycast(ray, out hit, 100f);
-            selectedSphere = GameObject.Find(hit.transform.name);
-
-            selectionPosition = selectedSphere.transform.position;
-            whiteSphereScript = selectedSphere.GetComponent<WhiteSphereScript>();
-            selectedPlace = new string[3];
-            selectedPlace = hit.transform.name;
+            CheckSelection();
             CheckPlace();
-            
-            //Debug.Log(hit.transform.name);
-
+            // selectedPlace = new string[3];
         }
         if(Input.GetMouseButtonDown(1))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             Physics.Raycast(ray, out hit, 100f);
-            movePlacePoint = GameObject.Find(hit.transform.name);
-            sphereMove = selectedSphere.transform.position;
-            sphereMove = Vector3.MoveTowards(sphereMove, movePlacePoint.transform.position, 2 * Time.deltaTime);
-            Debug.Log("tak");
+            movePlace = hit.transform.name;
         }
     }
     void CheckPlace(){
         for (int i = 0; i <= 8; i++)
         {
-            if(gameController.whiteSpherePosition[i] == selectedPlace){
-                Debug.Log("tak");
-            }
-            if(gameController.blackSpherePosition[i] == selectedPlace){
-                Debug.Log("tak");
-            }
+            if(boardController.whiteSpherePosition[i] == selectedPlace || boardController.blackSpherePosition[i] == selectedPlace)
+            {
 
+            }
         }
     }
     public void CalculateSelection(){
@@ -97,8 +74,18 @@ public class Selection : MonoBehaviour
         int y = Int32.Parse(yString);
         int z = Int32.Parse(zString);
         Debug.Log(x);
+        
 
         adjacentPlaces = new string[10];
+    }
+    string CheckSelection(){
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Physics.Raycast(ray, out hit, 100f);
+            // selectedSphere = GameObject.Find(hit.transform.name);
+            // sphereMove = selectedSphere.transform.position;
+            // sphereMove = Vector3.MoveTowards(sphereMove, movePlacePoint.transform.position, 2 * Time.deltaTime);
+            selectedPlace = hit.transform.name;
+            return  selectedPlace;
     }
 
 }
