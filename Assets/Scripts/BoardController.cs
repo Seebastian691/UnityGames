@@ -6,8 +6,8 @@ using System;
 public class BoardController : MonoBehaviour
 {
     [SerializeField] GameStartPosition startPosition;
-    public string[] whiteSpherePosition;
-    public string[] blackSpherePosition;
+    public int[] whiteSpherePosition;
+    public int[] blackSpherePosition;
 
     Selection selectionScript;
     [SerializeField] GameObject cameraMain;

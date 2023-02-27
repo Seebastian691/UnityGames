@@ -5,6 +5,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "NewStartPosition", menuName = "StartPosition")]
 public class GameStartPosition : ScriptableObject
 {
-    public string[] WhiteStartPosition;
-    public string[] BlackStartPosition;
+    public int[] WhiteStartPosition;
+    public int[] BlackStartPosition;
 }

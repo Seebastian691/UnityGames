@@ -12,23 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fb0b771b4c610b42bb550d0c43b3842, type: 3}
   m_Name: StartPosition
   m_EditorClassIdentifier: 
-  WhiteStartPosition:
-  - 2.2.2
-  - 3.2.2
-  - 4.2.2
-  - 5.2.2
-  - 6.2.2
-  - 3.3.3
-  - 4.3.3
-  - 5.3.3
-  - 6.3.3
-  BlackStartPosition:
-  - 2.10.6
-  - 3.9.7
-  - 4.8.8
-  - 5.7.9
-  - 6.6.10
-  - 3.9.6
-  - 4.8.7
-  - 5.7.8
-  - 6.6.9
+  WhiteStartPosition: 0d0000000e0000000f0000001000000011000000190000001a0000001b0000001c000000
+  BlackStartPosition: 5e0000005f0000006000000061000000690000006a0000006b0000006c0000006d000000
