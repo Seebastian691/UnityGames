@@ -7,7 +7,6 @@ public class Selection : MonoBehaviour
 {
     [SerializeField] Camera cameraMain;
     [SerializeField] GameObject whiteSphere;
-    [SerializeField] LayerMask whiteSphereLayer;
     [SerializeField] BoardController boardController;
     [SerializeField] GameObject marker;
     public RaycastHit hit;
@@ -18,6 +17,7 @@ public class Selection : MonoBehaviour
     WhiteSphereScript whiteSphereScript;
     Ray ray;
     private int[] possibleMoves;
+    private bool canMove;
 
     Vector3 cameraPosition;
     Vector3 cameraPositionRay;
@@ -25,6 +25,7 @@ public class Selection : MonoBehaviour
     //GameObject selectedSphere;
 
     public int[] adjacentPlaces = new int[6];
+
 
     //Camera camera;
 
@@ -38,12 +39,18 @@ public class Selection : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         if(Input.GetMouseButtonDown(0))
         {
             CheckSelection();
+            CheckPlace();
+
+            
+            // if(!canMove){
             selectedPlace = selectedSphere;
-            //CheckPlace();
-            //Debug.Log(boardController.whiteSpherePosition[1]);
+            // }else{
+            //     selectedPlace = 122;
+            // }
 
             CalculateSelection();
         }
@@ -51,31 +58,35 @@ public class Selection : MonoBehaviour
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             Physics.Raycast(ray, out hit, 100f);
+            //Debug.Log(boardController.whiteSpherePosition[1]);
+            
+
             for (int i = 0; i < adjacentPlaces.Length; i++)
             {
                 if(adjacentPlaces[i] == int.Parse(hit.transform.name))
                 {
-                    movePlace = int.Parse(hit.transform.name);
+                    if(canMove)
+                    {
+                        movePlace = int.Parse(hit.transform.name);
+                    }
                 }
                 
             }
             
         }
     }
-    public int CheckPlace(){
-        for (int i = 0; i <= 8; i++)
-        {
-            if(boardController.whiteSpherePosition[i] == selectedSphere)
+    bool CheckPlace(){
+        for (int i = 0; i<=8; i++){
+            if(boardController.whiteSpherePosition[i] == selectedSphere || boardController.blackSpherePosition[i] == selectedSphere)
             {
-                selectedPlace = selectedSphere;
-                Debug.Log(selectedSphere);
-            }
-            if(boardController.blackSpherePosition[i] == selectedSphere)
-            {
-                selectedPlace = selectedSphere;
+                Debug.Log("tak");
+                canMove = false;
+            }else{
+                canMove = true;
+                Debug.Log("nie");
             }
         }
-        return selectedPlace;
+        return canMove;
     }
     public void CalculateSelection(){
         adjacentPlaces[0] = selectedPlace - 1;
@@ -109,7 +120,9 @@ public class Selection : MonoBehaviour
     int CheckSelection(){
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             Physics.Raycast(ray, out hit, 100f);
-            selectedSphere = int.Parse(hit.transform.name);
+            if(hit.collider != null){
+                selectedSphere = int.Parse(hit.transform.name);
+            }
             return  selectedSphere;
     }
 
